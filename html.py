@@ -9,5 +9,5 @@ for filename in os.listdir(dir_path):
     else:
         raise Exception(f"Incorrect file type for file `{filename}`")
 
-with open('gallery.html', 'w') as f:
+with open('gal.html', 'w') as f:
     f.write(html)

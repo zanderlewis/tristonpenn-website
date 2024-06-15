@@ -29,8 +29,12 @@ body {
     padding: 20px;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
     text-align: center;
+}
+
+h3 {
+    padding: 20px;
 }
 
 p {
@@ -61,6 +65,10 @@ p {
     right: 20px;
     cursor: pointer;
     font-size: 30px;
+}
+
+a {
+    color: inherit;
 }
 
 /* Define styles for dark mode */
@@ -137,6 +145,44 @@ body.dark-mode .header {
 body.dark-mode .social svg,
 body.dark-mode .social img {
     filter: invert(1);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #222;
+    font-size: larger;
+}
+
+body.dark-mode nav {
+    background-color: #151515;
+    color: #fdfdfd;
+}
+
+nav a {
+    color: #222;
+    padding: 10px;
+}
+
+nav a:hover {
+    background-color: #e9ecef;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+body.dark-mode nav a {
+    color: #fdfdfd;
+}
+
+body.dark-mode nav a:hover {
+    background-color: #333;
+}
+
+header p {
+    font-size: large;
 }
 
 @media (max-width: 600px) {
