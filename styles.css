@@ -1,0 +1,146 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+body * {
+    animation: fadeIn 1s ease-in-out;
+}
+
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #fff;
+    /* Set initial background color to white */
+    color: #222;
+    /* Set initial text color to black */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Include color transition */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+/* Define styles for dark mode */
+body.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Styles for the sun and moon icons */
+.dark-mode-toggle::before {
+    content: '☀️';
+    /* Sun emoji for light mode */
+}
+
+body.dark-mode .dark-mode-toggle::before {
+    content: '🌙';
+    /* Moon emoji for dark mode */
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.image-container:hover .caption {
+    opacity: 1;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    color: #222;
+}
+
+body.dark-mode .footer {
+    background-color: #151515;
+    color: #fdfdfd;
+}
+
+.header {
+    width: 100%;
+    background-color: #f8f9fa;
+    color: #222;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body.dark-mode .header {
+    background-color: #151515;
+    color: #fdfdfd;
+}
+
+.social {
+    margin: auto;
+}
+
+.social svg {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+}
+
+.social img {
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+}
+
+body.dark-mode .social svg,
+body.dark-mode .social img {
+    filter: invert(1);
+}
+
+@media (max-width: 600px) {
+    .caption {
+        width: 80%;
+    }
+}
