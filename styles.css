@@ -185,8 +185,8 @@ header p {
     font-size: large;
 }
 
-@media (max-width: 600px) {
-    .caption {
-        width: 80%;
-    }
+body nav a.active {
+    pointer-events: none;
+    color: rgb(90, 108, 190);
+    text-decoration: none;
 }
