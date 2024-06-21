@@ -135,17 +135,19 @@ body.dark-mode .header {
 }
 
 .social svg {
-    display: inline-block;
+    display: flex;
     height: 25px;
     width: 25px;
     padding: 5px;
+    justify-content: space-between;
 }
 
 .social img {
-    display: inline-block;
+    display: flex;
     height: 25px;
     width: 25px;
     padding: 5px;
+    justify-content: space-between;
 }
 
 body.dark-mode .social svg,
@@ -203,16 +205,32 @@ body nav a.active {
     align-items: center;
 }
 
-.single img {
-    width: 100%;
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social .single {
+    padding: 15px;
+}
+
+.single img, .single svg {
+    width: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     display: block;
     height: 400px;
-    margin: 0 auto;
+    margin: 0;
 }
 
-.single img:hover {
+footer .single img, footer .single svg {
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+}
+
+.single img:hover, .single svg:hover{
     transform: scale(1.05);
 }
