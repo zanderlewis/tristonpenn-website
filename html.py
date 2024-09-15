@@ -29,10 +29,15 @@ def imgs():
 
 def main():
     with open('gallery.html', 'w') as f:
-        # find the line with `{{gallery}}` and replace it with the generated html
-        f.write(open('template.html').read().replace('{{gallery}}', html))
-        # write age from birthday and replace `{{age}}` with the calculated age
-        f.write(open('template.html').read().replace('{{age}}', str(get_age('2008-06-06'))))
+        # Get code from template.html
+        with open('template.html', 'r') as template:
+            html = template.read()
+        # Replace the placeholder with the images
+        html = html.replace('{{images}}', imgs())
+        html = html.replace('{{age}}', str(get_age('2008-06-06')))
+        # Write the final code to gallery.html
+        f.write(html)
+        
                 
 if __name__ == '__main__':
     main()
