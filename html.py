@@ -15,11 +15,11 @@ def get_age(birthdate):
 def imgs():
     html = ''
     for filename in os.listdir(dir_path):
-        if filename.lower().endswith('.jpg') or filename.lower().endswith('.png') or filename.lower().endswith('.jpeg'):
+        if filename.lower().endswith('.jpg') or filename.lower().endswith('.png') or filename.lower().endswith('.jpeg') and not filename == 'backstage.png' and not filename == 'favicon.png':
             html += f'''
                 <div class="image-container">
-                    <a target="_blank" href="{filename}">
-                        <img src="{filename}" alt="Gallery Image" loading="lazy">
+                    <a target="_blank" href="images/{filename}">
+                        <img src="images/{filename}" alt="Gallery Image" loading="lazy">
                     </a>
                 </div>
             '''
