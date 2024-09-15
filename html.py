@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 dir_path = './images'
+ignore_dir = './images/ignore'
 html = ''
 
 def get_age(birthdate):
@@ -9,22 +10,26 @@ def get_age(birthdate):
     birthdate = datetime.strptime(birthdate, '%Y-%m-%d')
     today = datetime.today()
     age = today.year - birthdate.year - ((today.month, today.day) < (birthdate.month, birthdate.day))
-    # convert 
     return age
 
 def imgs():
     html = ''
-    for filename in os.listdir(dir_path):
-        if filename.lower().endswith('.jpg') or filename.lower().endswith('.png') or filename.lower().endswith('.jpeg') and not filename == 'backstage.png' and not filename == 'favicon.png':
-            html += f'''
-                <div class="image-container">
-                    <a target="_blank" href="images/{filename}">
-                        <img src="images/{filename}" alt="Gallery Image" loading="lazy">
-                    </a>
-                </div>
-            '''
-        else:
-            raise Exception(f"Incorrect file type for file `{filename}`")
+    for root, dirs, files in os.walk(dir_path):
+        # Skip the ignore directory
+        if ignore_dir in root:
+            continue
+        for filename in files:
+            if filename.lower().endswith(('.jpg', '.png', '.jpeg')):
+                relative_path = os.path.relpath(os.path.join(root, filename), dir_path)
+                html += f'''
+                    <div class="image-container">
+                        <a target="_blank" href="images/{relative_path}">
+                            <img src="images/{relative_path}" alt="Gallery Image" loading="lazy">
+                        </a>
+                    </div>
+                '''
+            else:
+                raise Exception(f"Incorrect file type for file `{filename}`")
     return html
 
 def main():
@@ -37,7 +42,6 @@ def main():
         html = html.replace('{{age}}', str(get_age('2008-06-06')))
         # Write the final code to gallery.html
         f.write(html)
-        
-                
+
 if __name__ == '__main__':
     main()
