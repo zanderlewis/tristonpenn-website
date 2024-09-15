@@ -1,4 +1,4 @@
-name: Deploy to DreamHost via SFTP
+name: Deploy to DreamHost via sshpass
 
 on:
   push:
@@ -12,16 +12,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install lftp
-        run: sudo apt-get install lftp
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
-      - name: Deploy via SFTP
+      - name: Add SSH Key to known_hosts
+        env:
+          KNOWN_HOSTS_ENTRY: ${{ secrets.KNOWN_HOSTS_ENTRY }}
+          HOST: ${{ secrets.HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$KNOWN_HOSTS_ENTRY" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+      
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Run Python scripts
+        run: |
+          python3 rename.py
+          python3 html.py
+
+      - name: Deploy via rsync and sshpass
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           HOST: ${{ secrets.HOST }}
           DEPLOY_PATH: tristonpenn.com/ # Change this to your project path
         run: |
-          lftp -u $USERNAME,$PASSWORD sftp://$HOST -e "
-          set sftp:auto-confirm yes;
-          mirror --reverse --delete --verbose --exclude .git/ ./ $DEPLOY_PATH; quit"
+          sshpass -p "$PASSWORD" rsync -avz --delete --exclude .git/ ./ $USERNAME@$HOST:$DEPLOY_PATH
